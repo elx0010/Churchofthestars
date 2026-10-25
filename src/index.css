@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
+@theme {
+  --color-earth-50: #fdfbf7;
+  --color-earth-100: #faf8f3;
+  --color-earth-200: #f5f1e8;
+  --color-earth-300: #ede6d9;
+  --color-earth-400: #ddd3ba;
+  --color-earth-500: #c9b896;
+  --color-earth-600: #b39a76;
+  --color-earth-700: #8b7355;
+  --color-earth-800: #6b5844;
+  --color-earth-900: #3d3228;
+  --color-earth-950: #2a241c;
+
+  --color-sage-50: #f8faf9;
+  --color-sage-100: #f1f5f3;
+  --color-sage-200: #e3ebe8;
+  --color-sage-300: #c8dcd6;
+  --color-sage-400: #a8c8bb;
+  --color-sage-500: #7fa097;
+  --color-sage-600: #6b8e7f;
+  --color-sage-700: #557066;
+  --color-sage-800: #445954;
+  --color-sage-900: #2a443b;
+  --color-sage-950: #1a2e27;
+}
+
+/* Tailwind's preflight already resets margin/padding/box-sizing. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reset scrollbar to default gray */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox */
+* {
+  scrollbar-color: #888 #f1f1f1;
+  scrollbar-width: thin;
+}
+
+/* Keep anchor targets from hiding under the sticky header */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #faf8f3;
+  color: #3d3228;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-earth-600 text-white rounded-lg font-semibold transition-all duration-300 hover:bg-earth-700;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 border-2 border-earth-600 text-earth-600 rounded-lg font-semibold transition-all duration-300 hover:bg-earth-50;
+  }
+
+  .section-title {
+    @apply text-4xl font-bold text-earth-900 mb-4;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border-2 border-earth-200 rounded-lg transition-all duration-200 focus:outline-none focus:border-earth-600;
+  }
+}
