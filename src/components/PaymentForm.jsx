@@ -7,6 +7,7 @@ export default function PaymentForm() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [bookingInfo, setBookingInfo] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +15,6 @@ export default function PaymentForm() {
     if (storedBooking) {
       setBookingInfo(JSON.parse(storedBooking));
     } else {
-      // Redirect to booking if no booking info
       setTimeout(() => navigate('/booking'), 2000);
     }
   }, [navigate]);
@@ -22,21 +22,30 @@ export default function PaymentForm() {
   const totalAmount = bookingInfo ? (RETREAT_PRICE * bookingInfo.participants) / 100 : 0;
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
-      // In a real implementation, this would call a backend to create a Stripe charge
-      // For now, this is just a placeholder form
+      // IMPORTANT: In production, this must be handled by a backend
+      // Never send raw card data through your frontend
+      // Use Stripe Elements on the frontend and handle token creation on backend
       
       const paymentData = {
-        ...data,
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
         bookingInfo,
         amount: totalAmount,
         timestamp: new Date().toISOString(),
       };
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // This should call your backend API which creates a Stripe payment intent
+      // and handles card tokenization securely
+      const response = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentData),
+      });
 
-      // Store confirmation data
+      if (!response.ok) throw new Error('Payment failed');
+
       sessionStorage.setItem('confirmationData', JSON.stringify(paymentData));
 
       setSubmitStatus({
@@ -50,8 +59,10 @@ export default function PaymentForm() {
     } catch (error) {
       setSubmitStatus({
         type: 'error',
-        message: 'Payment failed. Please try again.',
+        message: error.message || 'Payment failed. Please try again.',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -94,137 +105,66 @@ export default function PaymentForm() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Cardholder Info */}
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded mb-6">
+          <h4 className="font-semibold text-blue-900 mb-2">⚠️ Development Mode</h4>
+          <p className="text-blue-800 text-sm mb-3">
+            This payment form is currently in development mode. In production, you must integrate Stripe Elements 
+            to securely handle card payments without exposing sensitive data to your frontend.
+          </p>
+          <p className="text-blue-800 text-sm font-semibold">
+            ✓ Use Stripe Elements or Payment Element for card input<br/>
+            ✓ Create payment intents on your backend<br/>
+            ✓ Never transmit raw card data through your app
+          </p>
+        </div>
+
+        {/* Cardholder Info - Only Name & Email */}
         <div>
-          <h4 className="text-lg font-semibold text-earth-900 mb-4">Payment Information</h4>
+          <h4 className="text-lg font-semibold text-earth-900 mb-4">Contact Information</h4>
           
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="block text-earth-900 font-semibold mb-2">First Name</label>
               <input
-                {...register('cardholderFirstName', { required: 'First name is required' })}
+                {...register('firstName', { required: 'First name is required' })}
                 type="text"
                 className="input-field"
-                defaultValue={bookingInfo.firstName}
+                defaultValue={bookingInfo?.firstName}
               />
-              {errors.cardholderFirstName && <p className="text-red-600 text-sm mt-1">{errors.cardholderFirstName.message}</p>}
+              {errors.firstName && <p className="text-red-600 text-sm mt-1">{errors.firstName.message}</p>}
             </div>
             <div>
               <label className="block text-earth-900 font-semibold mb-2">Last Name</label>
               <input
-                {...register('cardholderLastName', { required: 'Last name is required' })}
+                {...register('lastName', { required: 'Last name is required' })}
                 type="text"
                 className="input-field"
-                defaultValue={bookingInfo.lastName}
+                defaultValue={bookingInfo?.lastName}
               />
-              {errors.cardholderLastName && <p className="text-red-600 text-sm mt-1">{errors.cardholderLastName.message}</p>}
+              {errors.lastName && <p className="text-red-600 text-sm mt-1">{errors.lastName.message}</p>}
             </div>
           </div>
 
           <div className="mb-4">
             <label className="block text-earth-900 font-semibold mb-2">Email</label>
             <input
-              {...register('cardholderEmail', { required: 'Email is required' })}
+              {...register('email', { required: 'Email is required', pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Invalid email' } })}
               type="email"
               className="input-field"
-              defaultValue={bookingInfo.email}
+              defaultValue={bookingInfo?.email}
             />
-            {errors.cardholderEmail && <p className="text-red-600 text-sm mt-1">{errors.cardholderEmail.message}</p>}
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-earth-900 font-semibold mb-2">Card Number</label>
-            <input
-              {...register('cardNumber', { 
-                required: 'Card number is required',
-                pattern: { value: /^\d{13,19}$/, message: 'Invalid card number' }
-              })}
-              type="text"
-              className="input-field"
-              placeholder="1234 5678 9012 3456"
-              maxLength="19"
-            />
-            {errors.cardNumber && <p className="text-red-600 text-sm mt-1">{errors.cardNumber.message}</p>}
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-earth-900 font-semibold mb-2">Expiry Date</label>
-              <input
-                {...register('expiryDate', { 
-                  required: 'Expiry date is required',
-                  pattern: { value: /^\d{2}\/\d{2}$/, message: 'Format: MM/YY' }
-                })}
-                type="text"
-                className="input-field"
-                placeholder="MM/YY"
-                maxLength="5"
-              />
-              {errors.expiryDate && <p className="text-red-600 text-sm mt-1">{errors.expiryDate.message}</p>}
-            </div>
-            <div>
-              <label className="block text-earth-900 font-semibold mb-2">CVV</label>
-              <input
-                {...register('cvv', { 
-                  required: 'CVV is required',
-                  pattern: { value: /^\d{3,4}$/, message: 'Invalid CVV' }
-                })}
-                type="text"
-                className="input-field"
-                placeholder="123"
-                maxLength="4"
-              />
-              {errors.cvv && <p className="text-red-600 text-sm mt-1">{errors.cvv.message}</p>}
-            </div>
+            {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
           </div>
         </div>
 
-        {/* Billing Address */}
-        <div>
-          <h4 className="text-lg font-semibold text-earth-900 mb-4">Billing Address</h4>
-          
-          <div className="mb-4">
-            <label className="block text-earth-900 font-semibold mb-2">Address</label>
-            <input
-              {...register('address', { required: 'Address is required' })}
-              type="text"
-              className="input-field"
-              placeholder="123 Main St"
-            />
-            {errors.address && <p className="text-red-600 text-sm mt-1">{errors.address.message}</p>}
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-earth-900 font-semibold mb-2">City</label>
-              <input
-                {...register('city', { required: 'City is required' })}
-                type="text"
-                className="input-field"
-                placeholder="City"
-              />
-              {errors.city && <p className="text-red-600 text-sm mt-1">{errors.city.message}</p>}
-            </div>
-            <div>
-              <label className="block text-earth-900 font-semibold mb-2">State/Province</label>
-              <input
-                {...register('state', { required: 'State/Province is required' })}
-                type="text"
-                className="input-field"
-                placeholder="CA"
-              />
-              {errors.state && <p className="text-red-600 text-sm mt-1">{errors.state.message}</p>}
-            </div>
-            <div>
-              <label className="block text-earth-900 font-semibold mb-2">ZIP/Postal Code</label>
-              <input
-                {...register('zipCode', { required: 'ZIP code is required' })}
-                type="text"
-                className="input-field"
-                placeholder="12345"
-              />
-              {errors.zipCode && <p className="text-red-600 text-sm mt-1">{errors.zipCode.message}</p>}
-            </div>
+        {/* TODO: Replace with Stripe Elements */}
+        <div className="bg-amber-50 border border-amber-200 p-6 rounded-lg">
+          <h4 className="text-lg font-semibold text-amber-900 mb-4">Payment Method (Stripe Integration Needed)</h4>
+          <p className="text-amber-800 mb-4">
+            TODO: Integrate Stripe Elements here. Replace with CardElement or PaymentElement component.
+          </p>
+          <div className="p-4 bg-white border-2 border-dashed border-amber-300 rounded text-center text-amber-700">
+            [Stripe CardElement will be rendered here]
           </div>
         </div>
 
@@ -232,13 +172,13 @@ export default function PaymentForm() {
         <div>
           <label className="flex items-center gap-2">
             <input
-              {...register('agreeToPaymentTerms', { required: 'You must agree to payment terms' })}
+              {...register('agreeToTerms', { required: 'You must agree to the terms' })}
               type="checkbox"
               className="w-4 h-4"
             />
             <span className="text-earth-700">I agree to the payment terms and cancellation policy</span>
           </label>
-          {errors.agreeToPaymentTerms && <p className="text-red-600 text-sm mt-1">{errors.agreeToPaymentTerms.message}</p>}
+          {errors.agreeToTerms && <p className="text-red-600 text-sm mt-1">{errors.agreeToTerms.message}</p>}
         </div>
 
         {submitStatus && (
@@ -251,12 +191,16 @@ export default function PaymentForm() {
           </div>
         )}
 
-        <button type="submit" className="btn-primary w-full text-lg py-4">
-          Pay ${totalAmount.toFixed(2)}
+        <button 
+          type="submit" 
+          className="btn-primary w-full text-lg py-4"
+          disabled={loading}
+        >
+          {loading ? 'Processing...' : `Pay $${totalAmount.toFixed(2)}`}
         </button>
 
         <p className="text-xs text-earth-600 text-center">
-          🔒 Your payment information is secure and encrypted.
+          🔒 Your information is secure. Card data is encrypted and never stored on our servers.
         </p>
       </form>
     </div>
