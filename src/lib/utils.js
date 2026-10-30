@@ -1,4 +1,4 @@
-// Mock retreat dates - replace with Firebase data in production
+// Mock retreat dates for development.
 export const mockRetreats = [
   {
     id: 1,

@@ -38,13 +38,13 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-earth-50 to-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
-      <h3 className="text-2xl font-bold text-earth-900 mb-2">Start Your Journey</h3>
-      <p className="text-earth-600 mb-6">Join us for a transformative retreat experience</p>
+    <div className="bg-gradient-to-b from-brand-cream/30 to-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+      <h3 className="text-2xl font-bold text-brand-night mb-2">Start Your Journey</h3>
+      <p className="text-brand-forest mb-6">Join us for a transformative retreat experience</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-earth-900 font-semibold mb-2">First Name</label>
+          <label className="block text-brand-night font-semibold mb-2">First Name</label>
           <input
             {...register('firstName', { required: 'First name is required' })}
             type="text"
@@ -55,7 +55,7 @@ export default function SignupForm() {
         </div>
 
         <div>
-          <label className="block text-earth-900 font-semibold mb-2">Last Name</label>
+          <label className="block text-brand-night font-semibold mb-2">Last Name</label>
           <input
             {...register('lastName', { required: 'Last name is required' })}
             type="text"
@@ -66,7 +66,7 @@ export default function SignupForm() {
         </div>
 
         <div>
-          <label className="block text-earth-900 font-semibold mb-2">Email</label>
+          <label className="block text-brand-night font-semibold mb-2">Email</label>
           <input
             {...register('email', { required: 'Email is required' })}
             type="email"
@@ -91,7 +91,7 @@ export default function SignupForm() {
         </button>
       </form>
 
-      <p className="text-xs text-earth-600 text-center mt-4">
+      <p className="text-xs text-brand-forest text-center mt-4">
         We respect your privacy. Your information is secure with us.
       </p>
     </div>

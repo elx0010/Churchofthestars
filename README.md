@@ -1,6 +1,6 @@
 # Church of the Stars - Website
 
-A beautiful, responsive website for a wellness and spiritual retreat booking platform. Built with React, Vite, Tailwind CSS, Firebase, and Stripe.
+A beautiful, responsive website for a wellness and spiritual retreat booking platform. Built with React, Vite, and Tailwind CSS, with Stripe libraries installed for payment integration.
 
 ## Features
 
@@ -17,8 +17,8 @@ A beautiful, responsive website for a wellness and spiritual retreat booking pla
 - **Styling**: Tailwind CSS 4
 - **Forms**: React Hook Form
 - **Routing**: React Router v6
-- **Backend (Ready for)**: Firebase (Database), Stripe (Payments), SendGrid (Email)
-- **State Management**: Session Storage (development), Firebase (production)
+- **Integrations**: Stripe (payment integration in progress), SendGrid (email setup planned)
+- **State Management**: Session Storage (browser-only; no persistent booking storage)
 
 ## Project Structure
 
@@ -38,7 +38,6 @@ src/
 │   ├── Payment.jsx       # Payment page
 │   └── Confirmation.jsx  # Confirmation page
 ├── config/           # Configuration files
-│   ├── firebase.js      # Firebase initialization
 │   └── stripe.js        # Stripe configuration
 ├── lib/              # Utility functions
 │   └── utils.js         # Helper functions and mock data
@@ -66,10 +65,9 @@ cd churchofthestars
 npm install
 ```
 
-3. Set up environment variables:
+3. Create `.env.local` and add your Stripe publishable key:
 ```bash
-cp .env.example .env.local
-# Edit .env.local with your Firebase and Stripe credentials
+VITE_STRIPE_PUBLIC_KEY=your_stripe_publishable_key
 ```
 
 4. Start the development server:
@@ -84,28 +82,10 @@ The app will be available at `http://localhost:5173/`
 Create a `.env.local` file in the project root with the following variables:
 
 ```
-VITE_FIREBASE_API_KEY=your_key
-VITE_FIREBASE_AUTH_DOMAIN=your_domain
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-VITE_STRIPE_PUBLIC_KEY=your_stripe_public_key
+VITE_STRIPE_PUBLIC_KEY=your_stripe_publishable_key
 ```
 
 ## Backend Integration Notes
-
-### Firebase Setup
-
-The app is ready for Firebase integration:
-- Database schema ready in `src/config/firebase.js`
-- Mock retreat data in `src/lib/utils.js` (replace with Firestore queries)
-- Authentication setup available in firebase config
-
-**Collections to create in Firestore:**
-- `retreats` - Retreat information and availability
-- `bookings` - User booking records
-- `users` - User profile information
 
 ### Stripe Payment Integration
 
@@ -120,7 +100,7 @@ Payment processing is currently client-side only. For production:
 - Backend should validate booking data
 - Create Stripe PaymentIntent or Charge on backend
 - Confirm payment securely
-- Store transaction records in Firebase
+- Store transaction records in a persistent database
 
 ### SendGrid Email Confirmation
 
@@ -158,11 +138,7 @@ npm run lint      # Run ESLint
 
 ## Current Data
 
-All retreat data and bookings use mock data stored in `sessionStorage` (browser-only storage). To persist data:
-
-1. Move mock data from `src/lib/utils.js` to Firestore
-2. Update components to query Firebase instead
-3. Implement real-time updates with Firestore listeners
+Retreat information is currently mock data in `src/lib/utils.js`, and bookings are stored in browser `sessionStorage`. Both are temporary and are not shared across devices or saved to a server. Add a backend and persistent database before relying on bookings.
 
 **Current mock retreat cost:** $550 per person (configurable in `src/config/stripe.js`)
 
@@ -174,7 +150,7 @@ All retreat data and bookings use mock data stored in `sessionStorage` (browser-
 - Use HTTPS for all connections
 - Implement proper authentication before allowing bookings
 - Sanitize all user input
-- Use Firebase security rules to protect data
+- Restrict backend access and validate booking data server-side
 
 ## Responsive Design
 
@@ -199,7 +175,7 @@ All components tested on:
 
 - [ ] Email confirmations via SendGrid
 - [ ] Payment processing with Stripe
-- [ ] Firebase database integration
+- [ ] Persistent booking and retreat storage
 - [ ] User authentication
 - [ ] Admin dashboard for retreat management
 - [ ] Email marketing integration

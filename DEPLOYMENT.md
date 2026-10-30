@@ -12,12 +12,6 @@
 2. Go to vercel.com and create a new project
 3. Import your GitHub repository
 4. Set environment variables in Vercel project settings:
-   - `VITE_FIREBASE_API_KEY`
-   - `VITE_FIREBASE_AUTH_DOMAIN`
-   - `VITE_FIREBASE_PROJECT_ID`
-   - `VITE_FIREBASE_STORAGE_BUCKET`
-   - `VITE_FIREBASE_MESSAGING_SENDER_ID`
-   - `VITE_FIREBASE_APP_ID`
    - `VITE_STRIPE_PUBLIC_KEY`
 
 5. Deploy!
@@ -44,22 +38,16 @@
 - [ ] Rotate keys periodically
 - [ ] Use Stripe's restricted API keys for frontend
 
-### 3. Firebase Security (MEDIUM)
-- [ ] Enable Firebase Security Rules for Firestore
-- [ ] Set up proper authentication (currently not fully implemented)
-- [ ] Restrict database access to authenticated users only
-- [ ] Use environment variables for all Firebase config
-
-### 4. CORS Configuration (MEDIUM)
+### 3. CORS Configuration (MEDIUM)
 - [ ] Configure Stripe webhook handling on backend
 - [ ] Set proper CORS headers on your backend API
 - [ ] Only allow your frontend domain to make requests
 
-### 5. Testing Checklist
+### 4. Testing Checklist
 - [ ] Test payment flow with Stripe test keys (pk_test_*)
 - [ ] Verify environment variables load correctly on Vercel
 - [ ] Test error handling and user feedback
-- [ ] Verify Firebase connection works on production
+- [ ] Verify payment backend and webhook work in production
 
 ## Local Development
 
@@ -81,11 +69,5 @@ npm run preview
 
 Create `.env.local` with:
 ```
-VITE_FIREBASE_API_KEY=your_key
-VITE_FIREBASE_AUTH_DOMAIN=your_domain
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
 VITE_STRIPE_PUBLIC_KEY=pk_test_your_key
 ```

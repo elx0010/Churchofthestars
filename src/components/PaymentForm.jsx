@@ -70,7 +70,7 @@ export default function PaymentForm() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <p className="text-earth-700 mb-4">Loading booking information...</p>
+          <p className="text-brand-pine mb-4">Loading booking information...</p>
           <div className="animate-spin text-4xl">⏳</div>
         </div>
       </div>
@@ -82,24 +82,24 @@ export default function PaymentForm() {
       <h2 className="section-title">Complete Payment</h2>
 
       {/* Order Summary */}
-      <div className="bg-earth-50 p-6 rounded-lg mb-8">
-        <h3 className="text-xl font-bold text-earth-900 mb-4">Order Summary</h3>
+      <div className="bg-brand-cream/30 p-6 rounded-lg mb-8">
+        <h3 className="text-xl font-bold text-brand-night mb-4">Order Summary</h3>
         <div className="space-y-2 mb-4">
           <div className="flex justify-between">
-            <span className="text-earth-700">Retreat:</span>
+            <span className="text-brand-pine">Retreat:</span>
             <span className="font-semibold">{bookingInfo.retreat?.title}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-earth-700">Participants:</span>
+            <span className="text-brand-pine">Participants:</span>
             <span className="font-semibold">{bookingInfo.participants}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-earth-700">Price per person:</span>
+            <span className="text-brand-pine">Price per person:</span>
             <span className="font-semibold">${(RETREAT_PRICE / 100).toFixed(2)}</span>
           </div>
-          <div className="border-t-2 border-earth-200 pt-2 flex justify-between">
-            <span className="text-lg font-bold text-earth-900">Total Amount:</span>
-            <span className="text-lg font-bold text-earth-600">${totalAmount.toFixed(2)}</span>
+          <div className="border-t-2 border-brand-cream pt-2 flex justify-between">
+            <span className="text-lg font-bold text-brand-night">Total Amount:</span>
+            <span className="text-lg font-bold text-brand-forest">${totalAmount.toFixed(2)}</span>
           </div>
         </div>
       </div>
@@ -120,11 +120,11 @@ export default function PaymentForm() {
 
         {/* Cardholder Info - Only Name & Email */}
         <div>
-          <h4 className="text-lg font-semibold text-earth-900 mb-4">Contact Information</h4>
+          <h4 className="text-lg font-semibold text-brand-night mb-4">Contact Information</h4>
           
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-earth-900 font-semibold mb-2">First Name</label>
+              <label className="block text-brand-night font-semibold mb-2">First Name</label>
               <input
                 {...register('firstName', { required: 'First name is required' })}
                 type="text"
@@ -134,7 +134,7 @@ export default function PaymentForm() {
               {errors.firstName && <p className="text-red-600 text-sm mt-1">{errors.firstName.message}</p>}
             </div>
             <div>
-              <label className="block text-earth-900 font-semibold mb-2">Last Name</label>
+              <label className="block text-brand-night font-semibold mb-2">Last Name</label>
               <input
                 {...register('lastName', { required: 'Last name is required' })}
                 type="text"
@@ -146,7 +146,7 @@ export default function PaymentForm() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-earth-900 font-semibold mb-2">Email</label>
+            <label className="block text-brand-night font-semibold mb-2">Email</label>
             <input
               {...register('email', { required: 'Email is required', pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Invalid email' } })}
               type="email"
@@ -176,7 +176,7 @@ export default function PaymentForm() {
               type="checkbox"
               className="w-4 h-4"
             />
-            <span className="text-earth-700">I agree to the payment terms and cancellation policy</span>
+            <span className="text-brand-pine">I agree to the payment terms and cancellation policy</span>
           </label>
           {errors.agreeToTerms && <p className="text-red-600 text-sm mt-1">{errors.agreeToTerms.message}</p>}
         </div>
@@ -199,7 +199,7 @@ export default function PaymentForm() {
           {loading ? 'Processing...' : `Pay $${totalAmount.toFixed(2)}`}
         </button>
 
-        <p className="text-xs text-earth-600 text-center">
+        <p className="text-xs text-brand-forest text-center">
           🔒 Your information is secure. Card data is encrypted and never stored on our servers.
         </p>
       </form>

@@ -39,11 +39,11 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-earth-50 rounded-lg shadow-lg p-8 max-w-sm sm:max-w-xl mx-auto">
-      <h3 className="text-left mb-6 text-2xl font-semibold">Get In Touch</h3>
+    <div className="bg-brand-forest rounded-lg shadow-lg p-8 max-w-sm sm:max-w-xl mx-auto">
+      <h3 className="text-brand-cream text-left mb-6 text-2xl font-semibold">Get In Touch</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-earth-900 font-semibold mb-2">Name</label>
+          <label className="block text-brand-cream font-semibold mb-2">Name</label>
           <input
             {...register('name', { required: 'Name is required' })}
             type="text"
@@ -54,7 +54,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-earth-900 font-semibold mb-2">Email</label>
+          <label className="block text-brand-cream font-semibold mb-2">Email</label>
           <input
             {...register('email', { required: 'Email is required' })}
             type="email"
@@ -65,7 +65,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-earth-900 font-semibold mb-2">Phone</label>
+          <label className="block text-brand-cream font-semibold mb-2">Phone</label>
           <input
             {...register('phone', { required: 'Phone is required' })}
             type="tel"
@@ -76,7 +76,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-earth-900 font-semibold mb-2">Message</label>
+          <label className="block text-brand-cream font-semibold mb-2">Message</label>
           <textarea
             {...register('message', { required: 'Message is required', minLength: { value: 10, message: 'Message must be at least 10 characters' } })}
             className="input-field resize-none"
@@ -96,7 +96,7 @@ export default function ContactForm() {
           </div>
         )}
 
-        <button type="submit" className="btn-primary w-full">
+        <button type="submit" className="btn-primary bg-brand-leaf w-full">
           Send Message
         </button>
       </form>
