@@ -3,7 +3,7 @@ import RetreatCard from '../components/RetreatCard';
 import ContactForm from '../components/ContactForm';
 import SignupForm from '../components/SignupForm';
 import { mockRetreats, formatDateRange } from '../lib/utils';
-import cedarMountain from '../assets/CedarMountainFallColors.webp'
+import landingBackground from '../assets/Landing.jpg'
 import starryNight from '../assets/starryNight.jpg'
 
 export default function Landing() {
@@ -16,20 +16,20 @@ export default function Landing() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${cedarMountain})`,
+            backgroundImage: `url(${landingBackground})`,
           }}
         ></div>
         {/* Fade overlay - fades from transparent at top to next section color at bottom */}
-        <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.4) 35%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0.2) 55%, color-mix(in srgb, var(--color-brand-night) 10%, transparent) 70%, color-mix(in srgb, var(--color-brand-night) 90%, transparent) 95%, var(--color-brand-night) 100%)' }}></div>
+        <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.55) 35%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.4) 65%, color-mix(in srgb, var(--color-brand-night) 10%, transparent) 70%, color-mix(in srgb, var(--color-brand-night) 90%, transparent) 95%, var(--color-brand-night) 100%)' }}></div>
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-bold text-brand-cream mb-6" style={{ letterSpacing: '0.05em' }}>
+          <h1 className="text-6xl md:text-8xl font-bold text-brand-cream mb-6 [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]" style={{ letterSpacing: '0.05em' }}>
             Church of the Stars
           </h1>
-          <p className="text-xl md:text-2xl text-brand-cream mb-8 font-light">
+          <p className="text-xl md:text-2xl text-brand-cream mb-8 font-medium [text-shadow:0_1px_8px_rgba(0,0,0,0.8)]">
             Transform your spirit. Reconnect with nature. Find your purpose.
           </p>
-          <p className="text-lg text-brand-cream mb-12 max-w-2xl mx-auto font-light">
+          <p className="text-lg md:text-xl text-brand-cream mb-12 max-w-2xl mx-auto font-medium [text-shadow:0_1px_8px_rgba(0,0,0,0.8)]">
             Experience a wellness and spiritual retreat in the breathtaking beauty of the mountains.
             A journey of self-discovery awaits.
           </p>
@@ -148,7 +148,7 @@ export default function Landing() {
                 
                 <button
                   onClick={() => setSelectedRetreat(retreat)}
-                  className="bg-brand-forest text-brand-cream font-bold py-3 px-8 hover:bg-brand-pine transition-colors"
+                  className="bg-brand-forest rounded-sm text-brand-cream font-bold py-3 px-8 hover:bg-brand-pine transition-colors"
                 >
                   EXPLORE OUR RETREATS
                 </button>

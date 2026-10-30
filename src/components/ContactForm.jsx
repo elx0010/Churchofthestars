@@ -39,47 +39,47 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-brand-forest rounded-lg shadow-lg p-8 max-w-sm sm:max-w-xl mx-auto">
-      <h3 className="text-brand-cream text-left mb-6 text-2xl font-semibold">Get In Touch</h3>
+    <div className="bg-gray-100 rounded-lg shadow-lg p-8 max-w-sm sm:max-w-xl mx-auto">
+      <h3 className="text-brand-night text-left mb-6 text-2xl font-semibold">Get In Touch</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-brand-cream font-semibold mb-2">Name</label>
+          <label className="block text-brand-night font-semibold mb-2">Name</label>
           <input
             {...register('name', { required: 'Name is required' })}
             type="text"
-            className="input-field text-brand-cream"
+            className="input-field text-brand-night"
             placeholder="Your Name"
           />
           {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
         </div>
 
         <div>
-          <label className="block text-brand-cream font-semibold mb-2">Email</label>
+          <label className="block text-brand-night font-semibold mb-2">Email</label>
           <input
             {...register('email', { required: 'Email is required' })}
             type="email"
-            className="input-field text-brand-cream"
+            className="input-field text-brand-night"
             placeholder="your@email.com"
           />
           {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
         </div>
 
         <div>
-          <label className="block text-brand-cream font-semibold mb-2">Phone</label>
+          <label className="block text-brand-night font-semibold mb-2">Phone</label>
           <input
             {...register('phone', { required: 'Phone is required' })}
             type="tel"
-            className="input-field text-brand-cream"
+            className="input-field text-brand-night"
             placeholder="(555) 123-4567"
           />
           {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
         </div>
 
         <div>
-          <label className="block text-brand-cream font-semibold mb-2">Message</label>
+          <label className="block text-brand-night font-semibold mb-2">Message</label>
           <textarea
             {...register('message', { required: 'Message is required', minLength: { value: 10, message: 'Message must be at least 10 characters' } })}
-            className="input-field resize-none text-brand-cream"
+            className="input-field resize-none text-brand-night"
             rows="4"
             placeholder="Your message..."
           ></textarea>
@@ -96,7 +96,7 @@ export default function ContactForm() {
           </div>
         )}
 
-        <button type="submit" className="btn-primary bg-brand-leaf w-full">
+        <button type="submit" className="btn-primary bg-brand-leaf w-full cursor-pointer">
           Send Message
         </button>
       </form>

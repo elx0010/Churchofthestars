@@ -45,27 +45,27 @@ export default function BookingForm({ onBookingSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-brand-forest rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
-      <h2 className="section-title text-brand-cream">Complete Your Booking</h2>
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-100 rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
+      <h2 className="section-title text-brand-night">Complete Your Booking</h2>
 
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         <div>
-          <label className="block text-brand-cream font-semibold mb-2">First Name</label>
+          <label className="block text-brand-night font-semibold mb-2">First Name</label>
           <input
             {...register('firstName', { required: 'First name is required' })}
             type="text"
-            className="input-field text-brand-cream"
+            className="input-field text-brand-night"
             placeholder="John"
           />
           {errors.firstName && <p className="text-red-600 text-sm mt-1">{errors.firstName.message}</p>}
         </div>
 
         <div>
-          <label className="block text-brand-cream font-semibold mb-2">Last Name</label>
+          <label className="block text-brand-night font-semibold mb-2">Last Name</label>
           <input
             {...register('lastName', { required: 'Last name is required' })}
             type="text"
-            className="input-field text-brand-cream"
+            className="input-field text-brand-night"
             placeholder="Doe"
           />
           {errors.lastName && <p className="text-red-600 text-sm mt-1">{errors.lastName.message}</p>}
@@ -74,22 +74,22 @@ export default function BookingForm({ onBookingSubmit }) {
 
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         <div>
-          <label className="block text-brand-cream font-semibold mb-2">Email</label>
+          <label className="block text-brand-night font-semibold mb-2">Email</label>
           <input
             {...register('email', { required: 'Email is required', pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Invalid email' } })}
             type="email"
-            className="input-field text-brand-cream"
+            className="input-field text-brand-night"
             placeholder="your@email.com"
           />
           {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
         </div>
 
         <div>
-          <label className="block text-brand-cream font-semibold mb-2">Phone</label>
+          <label className="block text-brand-night font-semibold mb-2">Phone</label>
           <input
             {...register('phone', { required: 'Phone is required' })}
             type="tel"
-            className="input-field text-brand-cream"
+            className="input-field text-brand-night"
             placeholder="(555) 123-4567"
           />
           {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
@@ -97,14 +97,14 @@ export default function BookingForm({ onBookingSubmit }) {
       </div>
 
       <div className="mb-6">
-        <label className="block text-brand-cream font-semibold mb-2">Select Retreat</label>
+        <label className="block text-brand-night font-semibold mb-2">Select Retreat</label>
         <select
           {...register('retreatId', { required: 'Please select a retreat' })}
-          className="input-field text-brand-cream has-[option[value='']:checked]:text-brand-cream/50"
+          className="input-field text-brand-night has-[option[value='']:checked]:text-brand-night/50"
         >
-          <option className="bg-brand-forest text-brand-cream" value="">-- Choose a retreat --</option>
+          <option className="bg-brand-forest text-brand-night" value="">-- Choose a retreat --</option>
           {mockRetreats.slice(0, 1).map(retreat => (
-            <option key={retreat.id} value={retreat.id} className="bg-brand-forest text-brand-cream">
+            <option key={retreat.id} value={retreat.id} className="bg-brand-forest text-brand-night">
               {retreat.title} ({retreat.startDate.toLocaleDateString()})
             </option>
           ))}
@@ -113,7 +113,7 @@ export default function BookingForm({ onBookingSubmit }) {
       </div>
 
       {selectedRetreat && (
-        <div className="bg-brand-cream/50 p-4 rounded-lg mb-6">
+        <div className="bg-brand-night/50 p-4 rounded-lg mb-6">
           <h4 className="font-semibold text-brand-night text-xl mb-2">{selectedRetreat.title}</h4>
           <p className="text-brand-night mb-2">{selectedRetreat.description}</p>
           <p className="text-brand-night text-lg font-semibold">Cost: $550.00 per person</p>
@@ -121,23 +121,23 @@ export default function BookingForm({ onBookingSubmit }) {
       )}
 
       <div className="mb-6">
-        <label className="block text-brand-cream font-semibold mb-2">Number of Participants</label>
+        <label className="block text-brand-night font-semibold mb-2">Number of Participants</label>
         <input
           {...register('participants', { required: 'Number of participants is required', min: { value: 1, message: 'At least 1 participant required' } })}
           type="number"
           min="1"
           max="10"
-          className="input-field text-brand-cream"
+          className="input-field text-brand-night"
           placeholder="1"
         />
         {errors.participants && <p className="text-red-600 text-sm mt-1">{errors.participants.message}</p>}
       </div>
 
       <div className="mb-6">
-        <label className="block text-brand-cream font-semibold mb-2">Special Requests</label>
+        <label className="block text-brand-night font-semibold mb-2">Special Requests</label>
         <textarea
           {...register('specialRequests')}
-          className="input-field resize-none text-brand-cream"
+          className="input-field resize-none text-brand-night"
           rows="3"
           placeholder="Any special dietary needs, accessibility requirements, etc."
         ></textarea>
@@ -150,7 +150,7 @@ export default function BookingForm({ onBookingSubmit }) {
             type="checkbox"
             className="w-4 h-4"
           />
-          <span className="text-brand-cream">I agree to the booking terms and conditions</span>
+          <span className="text-brand-night">I agree to the booking terms and conditions</span>
         </label>
         {errors.agreeToTerms && <p className="text-red-600 text-sm mt-1">{errors.agreeToTerms.message}</p>}
       </div>

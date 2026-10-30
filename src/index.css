@@ -63,6 +63,6 @@ body {
   }
 
   .input-field {
-    @apply w-full px-4 py-2 border-2 border-brand-cream rounded-lg transition-all duration-200 focus:outline-none focus:border-brand-dCream placeholder:text-brand-cream/50;
+    @apply w-full px-4 py-2 border-2 border-brand-night rounded-lg transition-all duration-200 focus:outline-none focus:border-brand-leaf placeholder:text-brand-night/50;
   }
 }
