@@ -1,26 +1,52 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 export default function Confirmation() {
+  const [searchParams] = useSearchParams();
+  const sessionId = searchParams.get('session_id');
   const [confirmationData, setConfirmationData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [payment, setPayment] = useState(null);
+  const [verified, setVerified] = useState(false);
+  const isLoading = Boolean(sessionId) && !verified;
 
   useEffect(() => {
-    const storedData = sessionStorage.getItem('confirmationData');
-    if (storedData) {
-      setConfirmationData(JSON.parse(storedData));
-    }
-    setIsLoading(false);
-  }, []);
+    if (!sessionId) return;
+
+    // Only show a confirmation once Stripe confirms the payment was made.
+    fetch(`/api/verify-session?session_id=${encodeURIComponent(sessionId)}`)
+      .then((response) => (response.ok ? response.json() : null))
+      .then((result) => {
+        if (result?.paid) {
+          setPayment(result);
+          const storedData = sessionStorage.getItem('confirmationData');
+          if (storedData) setConfirmationData(JSON.parse(storedData));
+        }
+      })
+      .catch(() => {})
+      .finally(() => setVerified(true));
+  }, [sessionId]);
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin text-6xl mb-4">⏳</div>
-          <p className="text-brand-pine">Loading confirmation...</p>
+          <p className="text-brand-pine">Verifying your payment...</p>
         </div>
       </div>
+    );
+  }
+
+  if (!payment) {
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-brand-cream/30 to-white flex items-center justify-center px-4">
+        <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md">
+          <p className="text-xl text-brand-pine mb-6">We couldn&apos;t verify a completed payment.</p>
+          <Link to="/" className="btn-primary inline-block">
+            Return to Home
+          </Link>
+        </div>
+      </main>
     );
   }
 
@@ -28,7 +54,11 @@ export default function Confirmation() {
     return (
       <main className="min-h-screen bg-gradient-to-b from-brand-cream/30 to-white flex items-center justify-center px-4">
         <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md">
-          <p className="text-xl text-brand-pine mb-6">No booking information found</p>
+          <div className="text-6xl mb-4">🎉</div>
+          <p className="text-xl text-brand-night font-semibold mb-2">Payment received. Thank you!</p>
+          <p className="text-brand-pine mb-6">
+            Stripe will email your receipt to {payment.email}. We&apos;ll be in touch with retreat details.
+          </p>
           <Link to="/" className="btn-primary inline-block">
             Return to Home
           </Link>
@@ -49,7 +79,7 @@ export default function Confirmation() {
             Booking Confirmed!
           </h1>
           <p className="text-green-800 text-lg mb-4">
-            Your retreat is booked! A confirmation email has been sent to your inbox.
+            Your retreat is booked! Stripe will email a payment receipt to {payment.email}.
           </p>
           <p className="text-green-700 text-sm">
             Thank you for choosing Church of the Stars. We look forward to your transformation.
@@ -104,7 +134,7 @@ export default function Confirmation() {
             <div className="flex justify-between items-center">
               <span className="text-lg font-semibold text-brand-night">Total Paid:</span>
               <span className="text-2xl font-bold text-brand-forest">
-                ${(550 * bookingInfo.participants).toFixed(2)}
+                ${(payment.amountTotal / 100).toFixed(2)}
               </span>
             </div>
           </div>

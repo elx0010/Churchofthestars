@@ -24,44 +24,31 @@ export default function PaymentForm() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      // IMPORTANT: In production, this must be handled by a backend
-      // Never send raw card data through your frontend
-      // Use Stripe Elements on the frontend and handle token creation on backend
-      
       const paymentData = {
         name: `${data.firstName} ${data.lastName}`,
         email: data.email,
         bookingInfo,
-        amount: totalAmount,
-        timestamp: new Date().toISOString(),
       };
 
-      // This should call your backend API which creates a Stripe payment intent
-      // and handles card tokenization securely
-      const response = await fetch('/api/create-payment-intent', {
+      // The server sets the price; the browser only sends booking details.
+      const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(paymentData),
       });
 
-      if (!response.ok) throw new Error('Payment failed');
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.url) {
+        throw new Error(result.error || 'Unable to start payment. Please try again.');
+      }
 
       sessionStorage.setItem('confirmationData', JSON.stringify(paymentData));
-
-      setSubmitStatus({
-        type: 'success',
-        message: 'Payment processed successfully! Confirmation email sent.',
-      });
-
-      setTimeout(() => {
-        navigate('/confirmation');
-      }, 2000);
+      window.location.assign(result.url);
     } catch (error) {
       setSubmitStatus({
         type: 'error',
         message: error.message || 'Payment failed. Please try again.',
       });
-    } finally {
       setLoading(false);
     }
   };
@@ -105,20 +92,7 @@ export default function PaymentForm() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded mb-6">
-          <h4 className="font-semibold text-blue-900 mb-2">⚠️ Development Mode</h4>
-          <p className="text-blue-800 text-sm mb-3">
-            This payment form is currently in development mode. In production, you must integrate Stripe Elements 
-            to securely handle card payments without exposing sensitive data to your frontend.
-          </p>
-          <p className="text-blue-800 text-sm font-semibold">
-            ✓ Use Stripe Elements or Payment Element for card input<br/>
-            ✓ Create payment intents on your backend<br/>
-            ✓ Never transmit raw card data through your app
-          </p>
-        </div>
-
-        {/* Cardholder Info - Only Name & Email */}
+        {/* Contact info; card details are entered on Stripe's secure page */}
         <div>
           <h4 className="text-lg font-semibold text-brand-night mb-4">Contact Information</h4>
           
@@ -157,15 +131,11 @@ export default function PaymentForm() {
           </div>
         </div>
 
-        {/* TODO: Replace with Stripe Elements */}
-        <div className="bg-amber-50 border border-amber-200 p-6 rounded-lg">
-          <h4 className="text-lg font-semibold text-amber-900 mb-4">Payment Method (Stripe Integration Needed)</h4>
-          <p className="text-amber-800 mb-4">
-            TODO: Integrate Stripe Elements here. Replace with CardElement or PaymentElement component.
+        <div className="bg-brand-cream/30 p-6 rounded-lg">
+          <h4 className="text-lg font-semibold text-brand-night mb-2">Payment Method</h4>
+          <p className="text-brand-pine">
+            You&apos;ll be taken to Stripe&apos;s secure checkout page to enter your card details.
           </p>
-          <div className="p-4 bg-white border-2 border-dashed border-amber-300 rounded text-center text-amber-700">
-            [Stripe CardElement will be rendered here]
-          </div>
         </div>
 
         {/* Terms */}
@@ -196,7 +166,7 @@ export default function PaymentForm() {
           className="btn-primary w-full text-lg py-4"
           disabled={loading}
         >
-          {loading ? 'Processing...' : `Pay $${totalAmount.toFixed(2)}`}
+          {loading ? 'Redirecting to Stripe...' : `Pay $${totalAmount.toFixed(2)}`}
         </button>
 
         <p className="text-xs text-brand-forest text-center">

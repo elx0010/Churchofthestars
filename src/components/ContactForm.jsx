@@ -47,7 +47,7 @@ export default function ContactForm() {
           <input
             {...register('name', { required: 'Name is required' })}
             type="text"
-            className="input-field"
+            className="input-field text-brand-cream"
             placeholder="Your Name"
           />
           {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
@@ -58,7 +58,7 @@ export default function ContactForm() {
           <input
             {...register('email', { required: 'Email is required' })}
             type="email"
-            className="input-field"
+            className="input-field text-brand-cream"
             placeholder="your@email.com"
           />
           {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
@@ -69,7 +69,7 @@ export default function ContactForm() {
           <input
             {...register('phone', { required: 'Phone is required' })}
             type="tel"
-            className="input-field"
+            className="input-field text-brand-cream"
             placeholder="(555) 123-4567"
           />
           {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
@@ -79,7 +79,7 @@ export default function ContactForm() {
           <label className="block text-brand-cream font-semibold mb-2">Message</label>
           <textarea
             {...register('message', { required: 'Message is required', minLength: { value: 10, message: 'Message must be at least 10 characters' } })}
-            className="input-field resize-none"
+            className="input-field resize-none text-brand-cream"
             rows="4"
             placeholder="Your message..."
           ></textarea>

@@ -18,19 +18,16 @@
 
 ## ⚠️ IMPORTANT Security Issues Before Production
 
-### 1. Payment Processing (CRITICAL)
-**Current Issue:** The payment form needs backend integration for Stripe
+### 1. Payment Processing
+Payments use **Stripe Checkout**: the Pay button calls `api/create-checkout-session.js` (price set server-side), redirects to Stripe, and `/confirmation` verifies the payment with `api/verify-session.js`.
 
-**What to do:**
-- [ ] Set up a backend API (Node.js, Python, etc.) to handle Stripe payments
-- [ ] Use Stripe Elements or Payment Element for card input on frontend
-- [ ] Create a payment intent on your backend
-- [ ] Send only the payment token to your backend, never raw card data
-- [ ] Handle payment confirmation server-side
-
-**Resources:**
-- Stripe React documentation: https://stripe.com/docs/stripe-js/react
-- Stripe Payment Intent guide: https://stripe.com/docs/payments/payment-intents
+**Setup:**
+- [ ] In Vercel → Settings → Environment Variables, add `STRIPE_SECRET_KEY` (secret key, `sk_test_...` / `sk_live_...`). Never use a `VITE_` prefix for it.
+- [ ] Add `VITE_STRIPE_PUBLIC_KEY` (publishable key) and redeploy
+- [ ] In Stripe Dashboard → Settings → Emails, turn on "Successful payments" receipts
+- [ ] Test with card `4242 4242 4242 4242` in test mode, then switch both keys to live keys
+- [ ] Optional: set `SITE_URL` (e.g. `https://www.churchofthestars.co`) to force the redirect domain
+- [ ] Local testing of `/api` routes requires `npx vercel dev` (plain `npm run dev` doesn't serve them)
 
 ### 2. Environment Variables (HIGH)
 - [ ] Never commit `.env.local` to version control (already added to .gitignore)
