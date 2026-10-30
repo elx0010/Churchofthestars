@@ -165,7 +165,7 @@ export default function BookingForm({ onBookingSubmit }) {
         </div>
       )}
 
-      <button type="submit" className="btn-primary bg-brand-leaf w-full">
+      <button type="submit" className="btn-primary bg-brand-leaf w-full cursor-pointer">
         Proceed to Payment →
       </button>
     </form>

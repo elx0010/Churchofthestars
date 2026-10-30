@@ -15,21 +15,21 @@ export default function Payment() {
 
         {/* Process Steps */}
         <div className="flex justify-between items-center mb-12 flex-wrap gap-4">
-          <div className="flex items-center gap-3 flex-1 min-w-[150px]">
+          <div className="flex justify-center items-center gap-3 flex-1 ">
             <div className="w-10 h-10 bg-brand-forest text-white rounded-full flex items-center justify-center font-bold">
               ✓
             </div>
             <span className="font-semibold text-brand-night">Book</span>
           </div>
-          <div className="w-12 h-1 bg-brand-forest hidden sm:block flex-1"></div>
-          <div className="flex items-center gap-3 flex-1 min-w-[150px]">
+          <div className="w-12 h-1 bg-brand-forest rounded-lg hidden sm:block flex-1"></div>
+          <div className="flex items-center justify-center gap-3 flex-1 ">
             <div className="w-10 h-10 bg-brand-forest text-white rounded-full flex items-center justify-center font-bold">
               2
             </div>
             <span className="font-semibold text-brand-night">Pay</span>
           </div>
-          <div className="w-12 h-1 bg-brand-cream hidden sm:block flex-1"></div>
-          <div className="flex items-center gap-3 flex-1 min-w-[150px]">
+          <div className="w-12 h-1 bg-brand-cream rounded-lg hidden sm:block flex-1"></div>
+          <div className="flex items-center justify-center gap-3 flex-1 ">
             <div className="w-10 h-10 bg-brand-cream text-brand-night rounded-full flex items-center justify-center font-bold">
               3
             </div>

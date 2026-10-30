@@ -163,7 +163,7 @@ export default function PaymentForm() {
 
         <button 
           type="submit" 
-          className="btn-primary w-full text-lg py-4"
+          className="btn-primary w-full text-lg py-4 cursor-pointer"
           disabled={loading}
         >
           {loading ? 'Redirecting to Stripe...' : `Pay $${totalAmount.toFixed(2)}`}
