@@ -1,8 +1,5 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "env": {
-    "VITE_STRIPE_PUBLIC_KEY": "@stripe_public_key"
-  }
+  "framework": "vite"
 }
