@@ -58,7 +58,7 @@ export default function Header() {
             <Link
               to="/"
               className={`font-display text-xl font-medium transition-colors ${
-                isActive('/') ? 'text-brand-cream underline underline-offset-4' : 'text-brand-cream'
+                isActive('/') ? 'text-brand-cream' : 'text-brand-cream'
               }`}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -67,7 +67,7 @@ export default function Header() {
             <Link
               to="/booking"
               className={`font-display text-xl font-medium transition-colors ${
-                isActive('/booking') ? 'text-brand-cream underline underline-offset-4' : 'text-brand-cream'
+                isActive('/booking') ? 'text-brand-cream' : 'text-brand-cream'
               }`}
               onClick={() => setMobileMenuOpen(false)}
             >
