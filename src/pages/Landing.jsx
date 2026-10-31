@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import RetreatCard from '../components/RetreatCard';
-import ContactForm from '../components/ContactForm';
-import SignupForm from '../components/SignupForm';
-import { mockRetreats, formatDateRange } from '../lib/utils';
+import { useState } from 'react'
+import RetreatCard from '../components/RetreatCard'
+import ContactForm from '../components/ContactForm'
+import SignupForm from '../components/SignupForm'
+import { mockRetreats, formatDateRange } from '../lib/utils'
 import landingBackground from '../assets/Landing.jpg'
 import starryNight from '../assets/starryNight.jpg'
+import Offerings from '../components/Offerings'
+import FadeIn from '../components/FadeIn'
+import VideoSection from '../components/VideoSection'
 
 export default function Landing() {
   const [selectedRetreat, setSelectedRetreat] = useState(null);
@@ -23,30 +26,33 @@ export default function Landing() {
         <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.55) 35%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.4) 65%, color-mix(in srgb, var(--color-brand-night) 10%, transparent) 70%, color-mix(in srgb, var(--color-brand-night) 90%, transparent) 95%, var(--color-brand-night) 100%)' }}></div>
         
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-bold text-brand-cream mb-6 [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]" style={{ letterSpacing: '0.05em' }}>
+          <h1 className="hero-fade text-6xl md:text-8xl font-bold text-brand-cream mb-6 [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]" style={{ letterSpacing: '0.05em', '--hero-delay': '0.1s' }}>
             Church of the Stars
           </h1>
-          <p className="text-xl md:text-2xl text-brand-cream mb-8 font-medium [text-shadow:0_1px_8px_rgba(0,0,0,0.8)]">
+          <p className="hero-fade text-xl md:text-2xl text-brand-cream mb-8 font-medium [text-shadow:0_1px_8px_rgba(0,0,0,0.8)]" style={{ '--hero-delay': '0.6s' }}>
             Transform your spirit. Reconnect with nature. Find your purpose.
           </p>
-          <p className="text-lg md:text-xl text-brand-cream mb-12 max-w-2xl mx-auto font-medium [text-shadow:0_1px_8px_rgba(0,0,0,0.8)]">
-            Experience a wellness and spiritual retreat in the breathtaking beauty of the mountains.
-            A journey of self-discovery awaits.
-          </p>
-          <div className="flex justify-center">
-            <a
-              href="#calendar"
-              className="btn-primary inline-block"
-            >
-              View Retreat Dates
-            </a>
+          <div className="hero-fade" style={{ '--hero-delay': '1.1s' }}>
+            <p className="text-lg md:text-xl text-brand-cream mb-12 max-w-2xl mx-auto font-medium [text-shadow:0_1px_8px_rgba(0,0,0,0.8)]">
+              Experience a wellness and spiritual retreat in the breathtaking beauty of the mountains.
+              A journey of self-discovery awaits.
+            </p>
+            <div className="flex justify-center">
+              <a
+                href="#calendar"
+                className="btn-primary inline-block"
+              >
+                View Retreat Dates
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-4 bg-brand-night">
-        <div className="max-w-6xl mx-auto">
+      {/* About, Offerings and Video share one continuous gradient */}
+      <div className="bg-gradient-to-b from-brand-night to-brand-forest">
+      <section id="about" className="py-20 px-4">
+        <FadeIn className="max-w-6xl mx-auto">
           <h2 className="section-title text-center mb-12 text-brand-cream">About Church of the Stars</h2>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -69,61 +75,18 @@ export default function Landing() {
                 relaxation, personal growth, and lasting transformation.
               </p>
               <p className="text-brand-cream leading-relaxed">
-                Whether you're seeking peace, clarity, or a renewed sense of purpose, our experienced
+                Whether you're seeking peace, clarity, community, or a renewed sense of purpose, our experienced
                 facilitators are here to guide you through an unforgettable experience.
               </p>
             </div>
           </div>
-        </div>
+        </FadeIn>
       </section>
 
       {/* Our Offerings Section */}
-      <section className="py-20 px-4 bg-brand-night">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="section-title text-center mb-16 text-brand-cream">Our Offerings</h2>
-
-          <div className="space-y-16">
-            {/* Meditation Gong Sessions - Image Right */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-3xl font-bold text-brand-cream mb-4">Meditation Gong Sessions</h3>
-                <p className="text-brand-cream mb-6 leading-relaxed">
-                  Immersive gong bath meditations for deep healing and vibrational wellness. Experience the transformative power of sound as ancient gongs resonate through your being, promoting relaxation and spiritual awakening.
-                </p>
-              </div>
-              <div className="h-64 bg-gradient-to-br from-brand-leaf to-brand-forest rounded-lg overflow-hidden shadow-lg flex items-center justify-center">
-                <span className="text-8xl">🔔</span>
-              </div>
-            </div>
-
-            {/* Drums and Music - Image Left */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="h-64 bg-gradient-to-br from-brand-forest to-brand-cream rounded-lg overflow-hidden shadow-lg flex items-center justify-center order-2 md:order-1">
-                <span className="text-8xl">🥁</span>
-              </div>
-              <div className="order-1 md:order-2">
-                <h3 className="text-3xl font-bold text-brand-cream mb-4">Drums and Music</h3>
-                <p className="text-brand-cream mb-6 leading-relaxed">
-                  Rhythmic drumming circles and live music to awaken your spirit. Join our facilitators in sacred musical journeys that connect you to ancient rhythms and the heartbeat of nature itself.
-                </p>
-              </div>
-            </div>
-
-            {/* Spiritual Wellness - Image Right */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-3xl font-bold text-brand-cream mb-4">Spiritual Wellness</h3>
-                <p className="text-brand-cream mb-6 leading-relaxed">
-                  Holistic practices for mental clarity, emotional balance, and spiritual growth. Discover deep insights through teachings rooted in ancient wisdom and modern mindfulness practices.
-                </p>
-              </div>
-              <div className="h-64 bg-gradient-to-br from-brand-leaf to-brand-cream rounded-lg overflow-hidden shadow-lg flex items-center justify-center">
-                <span className="text-8xl">✨</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Offerings />
+      <VideoSection />
+      </div>
 
       {/* Retreat Calendar Section */}
       <section id="calendar" className="py-20 px-4 bg-brand-leaf">

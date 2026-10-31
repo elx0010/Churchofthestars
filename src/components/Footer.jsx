@@ -33,8 +33,8 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
-            <p className="text-brand-cream mb-2">info@churchofthestars.com</p>
-            <p className="text-brand-cream mb-2">(555) 123-4567</p>
+            <p className="text-brand-cream mb-2">info.churchofthestars@gmail.com</p>
+            <p className="text-brand-cream mb-2">(435) 592-2401</p>
             <p className="text-brand-cream">Retreat Center<br />Cedar City, Utah</p>
           </div>
         </div>

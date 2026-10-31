@@ -7,6 +7,24 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes hero-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-fade {
+  opacity: 0;
+  animation: hero-fade-in 0.9s ease-out forwards;
+  animation-delay: var(--hero-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 /* Reset scrollbar to default gray */
 ::-webkit-scrollbar {
   width: 12px;

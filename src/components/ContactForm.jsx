@@ -19,11 +19,16 @@ export default function ContactForm() {
         return;
       }
 
-      // In production, this would send to your backend
-      console.log('Contact form submitted:', data);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || 'Failed to submit form. Please try again.');
+      }
 
       setSubmitStatus({
         type: 'success',
@@ -33,7 +38,7 @@ export default function ContactForm() {
     } catch (error) {
       setSubmitStatus({
         type: 'error',
-        message: 'Failed to submit form. Please try again.',
+        message: error.message || 'Failed to submit form. Please try again.',
       });
     }
   };
@@ -84,6 +89,10 @@ export default function ContactForm() {
             placeholder="Your message..."
           ></textarea>
           {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message.message}</p>}
+        </div>
+
+        <div className="hidden" aria-hidden="true">
+          <input {...register('website')} type="text" tabIndex={-1} autoComplete="off" />
         </div>
 
         {submitStatus && (
