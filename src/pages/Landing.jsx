@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import RetreatCard from '../components/RetreatCard'
 import ContactForm from '../components/ContactForm'
 import SignupForm from '../components/SignupForm'
@@ -144,9 +145,9 @@ export default function Landing() {
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
-                  <a href="/booking" className="btn-primary inline-block">
+                  <Link to="/booking" className="btn-primary inline-block">
                     Book This Retreat →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
