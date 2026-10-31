@@ -119,8 +119,8 @@ export default function Landing() {
               
               {/* Right Column - Image */}
               <div className="order-1 md:order-2">
-                <div className="h-71 rounded-lg overflow-hidden shadow-lg flex items-center justify-center">
-                  <img src={starryNight} className="rounded-lg"/>
+                <div className="rounded-lg overflow-hidden shadow-lg">
+                  <img src={starryNight} alt="Starry night sky over the mountains" className="w-full block"/>
                 </div>
               </div>
             </div>
