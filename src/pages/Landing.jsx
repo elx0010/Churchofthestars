@@ -66,14 +66,12 @@ export default function Landing() {
             </div>
             <div>
               <p className="text-brand-cream mb-4 leading-relaxed">
-                Church of the Stars is a sanctuary dedicated to holistic wellness and spiritual growth.
-                Nestled in the heart of majestic mountains, our retreat center offers a transformative
-                experience designed to reconnect you with yourself and nature.
+                We believe that beneath every belief, name, and tradition, we share the same sky, 
+                and at Church of the Stars, we gather to remember that we are all one.
               </p>
               <p className="text-brand-cream mb-4 leading-relaxed">
-                Our programs combine meditation, yoga, nature immersion, and wellness practices to create
-                a unique journey of self-discovery. Each retreat is carefully designed to provide deep
-                relaxation, personal growth, and lasting transformation.
+                We combine meditation, yoga, nature immersion, wellness, and spiritual practices to create
+                a unique journey of self-discovery and connection.
               </p>
               <p className="text-brand-cream leading-relaxed">
                 Whether you're seeking peace, clarity, community, or a renewed sense of purpose, our experienced
