@@ -4,6 +4,7 @@ import dollyPartonImage from '../assets/dollyPartonImage.png'
 import footballYogaImage from '../assets/footballYogaImage.png'
 import lionHeartImage from '../assets/lionHeartImageSimple.jpg'
 import mrBeanImage from '../assets/mrBeanImage.png'
+import milkHoney from '../assets/milkHoney.jpg'
 
 const offerings = [
   {
@@ -21,7 +22,7 @@ const offerings = [
   {
     title: 'Lion Heart Arcadia',
     image: lionHeartImage,
-    frameClass: 'max-w-sm mx-auto',
+    frameClass: 'w-4/5 md:w-full max-w-sm mx-auto',
     description:
       'An active community in the mountains where every day offers a chance to connect with others and with yourself. Join in shared meals, guided reflection, movement, and storytelling, and leave with a calm, confident sense of purpose.',
   },
@@ -37,7 +38,13 @@ const offerings = [
     description:
       'Stretch, balance, and breathe with a ball at your feet. Football yoga blends gentle flowing poses with playful passes and team spirit, building flexibility and strength while keeping the mood light. All skill levels welcome.',
   },
-  
+  {
+    title: 'Milk and Honey Co',
+    image: milkHoney,
+    frameClass: 'w-4/5 md:w-full max-w-[416px] mx-auto',
+    description:
+      'Pure, all-natural milk and honey, just as nature intended. Every product is made with no artificial flavorings and no artificial sweeteners, only simple, wholesome ingredients you can taste and feel good about.',
+  },
 ]
 
 function Reveal({ children, className = '', from = 'left' }) {

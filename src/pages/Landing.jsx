@@ -8,6 +8,7 @@ import starryNight from '../assets/starryNight.jpg'
 import Offerings from '../components/Offerings'
 import FadeIn from '../components/FadeIn'
 import VideoSection from '../components/VideoSection'
+import aboutImage from '../assets/aboutImage.png'
 
 export default function Landing() {
   const [selectedRetreat, setSelectedRetreat] = useState(null);
@@ -56,11 +57,11 @@ export default function Landing() {
           <h2 className="section-title text-center mb-12 text-brand-cream">About Church of the Stars</h2>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="flex justify-center">
               <img
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop"
+                src={aboutImage}
                 alt="Mountain scenery"
-                className="rounded-lg shadow-lg"
+                className="rounded-lg shadow-lg w-auto h-auto max-w-[80%] md:max-w-full max-h-140"
               />
             </div>
             <div>
