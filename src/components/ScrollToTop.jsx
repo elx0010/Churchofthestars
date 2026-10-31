@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 if ('scrollRestoration' in window.history) {
@@ -8,10 +8,18 @@ if ('scrollRestoration' in window.history) {
 export default function ScrollToTop() {
   const { pathname, hash } = useLocation()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Section links like /#calendar should still scroll to their section
     if (hash && document.querySelector(hash)) return
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+
+    // The page uses smooth scrolling, which can cancel or delay the jump on mobile
+    const root = document.documentElement
+    const previous = root.style.scrollBehavior
+    root.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+    root.scrollTop = 0
+    document.body.scrollTop = 0
+    root.style.scrollBehavior = previous
   }, [pathname, hash])
 
   return null
