@@ -93,13 +93,6 @@ export default function Landing() {
             <span className="h-px w-24 bg-brand-dCream/60"></span>
           </div>
           <h2 className="section-title text-center mb-12">Upcoming Events</h2>
-          
-          <div className="mb-8">
-            <p className="text-center text-brand-pine text-lg mb-8">
-              Discover transformative experiences that combine nature, spirituality, and community. 
-              Browse and book your retreat directly below.
-            </p>
-          </div>
 
           <EventbriteWidget />
         </div>
