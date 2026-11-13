@@ -1,13 +1,11 @@
 # Church of the Stars - Website
 
-A beautiful, responsive website for a wellness and spiritual retreat booking platform. Built with React, Vite, and Tailwind CSS, with Stripe libraries installed for payment integration.
+A beautiful, responsive website for a wellness and spiritual retreat. Built with React, Vite, and Tailwind CSS. Bookings and payments are handled on Eventbrite.
 
 ## Features
 
-- **Landing Page**: Hero section, about section, retreat calendar, contact form, and signup form
-- **Booking Page**: Retreat selection and comprehensive booking form with FAQ
-- **Payment Page**: Secure payment form with order summary
-- **Confirmation Page**: Booking confirmation with next steps
+- **Landing Page**: Hero section, about section, retreat calendar, and contact form
+- **Eventbrite Booking**: Booking buttons link visitors straight to your Eventbrite events
 - **Responsive Design**: Works seamlessly on mobile, tablet, and desktop
 - **Earthy Modern Style**: Custom color palette with earth tones
 
@@ -17,8 +15,7 @@ A beautiful, responsive website for a wellness and spiritual retreat booking pla
 - **Styling**: Tailwind CSS 4
 - **Forms**: React Hook Form
 - **Routing**: React Router v6
-- **Integrations**: Stripe (payment integration in progress), SendGrid (email setup planned)
-- **State Management**: Session Storage (browser-only; no persistent booking storage)
+- **Integrations**: Eventbrite (booking and payment), Resend (contact form email)
 
 ## Project Structure
 
@@ -28,17 +25,11 @@ src/
 │   ├── Header.jsx        # Navigation header
 │   ├── Footer.jsx        # Footer component
 │   ├── RetreatCard.jsx   # Retreat card display
-│   ├── ContactForm.jsx   # Contact form
-│   ├── SignupForm.jsx    # Quick signup form
-│   ├── BookingForm.jsx   # Booking form
-│   └── PaymentForm.jsx   # Payment form
+│   └── ContactForm.jsx   # Contact form
 ├── pages/            # Page components
-│   ├── Landing.jsx       # Main landing page
-│   ├── Booking.jsx       # Booking page
-│   ├── Payment.jsx       # Payment page
-│   └── Confirmation.jsx  # Confirmation page
+│   └── Landing.jsx       # Main landing page
 ├── config/           # Configuration files
-│   └── stripe.js        # Stripe configuration
+│   └── eventbrite.js    # Eventbrite organizer URL
 ├── lib/              # Utility functions
 │   └── utils.js         # Helper functions and mock data
 ├── App.jsx           # Main app component with routing
@@ -65,10 +56,7 @@ cd churchofthestars
 npm install
 ```
 
-3. Create `.env.local` and add your Stripe publishable key:
-```bash
-VITE_STRIPE_PUBLIC_KEY=your_stripe_publishable_key
-```
+3. Set your Eventbrite URL in `src/config/eventbrite.js`.
 
 4. Start the development server:
 ```bash
@@ -79,40 +67,11 @@ The app will be available at `http://localhost:5173/`
 
 ## Environment Variables
 
-Create a `.env.local` file in the project root with the following variables:
+Only the contact form API (`api/contact.js`) uses environment variables. See [SETUP_GUIDE.md](SETUP_GUIDE.md).
 
-```
-VITE_STRIPE_PUBLIC_KEY=your_stripe_publishable_key
-```
+## Booking
 
-## Backend Integration Notes
-
-### Stripe Payment Integration
-
-Payment processing is currently client-side only. For production:
-
-1. Create a backend endpoint to handle Stripe charge creation
-2. Move sensitive keys to backend environment
-3. Use Stripe Elements for secure card input (client-side only handles card data)
-4. Implement webhook handling for payment confirmations
-
-**Implementation steps:**
-- Backend should validate booking data
-- Create Stripe PaymentIntent or Charge on backend
-- Confirm payment securely
-- Store transaction records in a persistent database
-
-### SendGrid Email Confirmation
-
-Emails are not currently sent. To implement:
-
-1. Create a backend endpoint for sending emails
-2. Use SendGrid API with authentication
-3. Create email templates for:
-   - Booking confirmation
-   - Payment receipt
-   - Pre-retreat information
-   - Reminder emails
+Visitors are sent to Eventbrite to book and pay. The header "Booking" link uses the organizer URL in `src/config/eventbrite.js`. The "Book This Retreat" button uses the retreat's `eventbriteUrl` (set in `src/lib/utils.js`) and falls back to the organizer URL.
 
 ## Styling
 
@@ -138,19 +97,13 @@ npm run lint      # Run ESLint
 
 ## Current Data
 
-Retreat information is currently mock data in `src/lib/utils.js`, and bookings are stored in browser `sessionStorage`. Both are temporary and are not shared across devices or saved to a server. Add a backend and persistent database before relying on bookings.
-
-**Current mock retreat cost:** $550 per person (configurable in `src/config/stripe.js`)
+Retreat information is currently mock data in `src/lib/utils.js`. Ticket prices and availability are managed in Eventbrite.
 
 ## Security Considerations
 
-⚠️ **For Production:**
-- Never expose Stripe secret keys in frontend
-- Always validate bookings on backend
 - Use HTTPS for all connections
-- Implement proper authentication before allowing bookings
 - Sanitize all user input
-- Restrict backend access and validate booking data server-side
+- Keep `RESEND_API_KEY` in the backend environment only (never a `VITE_` variable)
 
 ## Responsive Design
 
@@ -173,9 +126,7 @@ All components tested on:
 
 ## Future Enhancements
 
-- [ ] Email confirmations via SendGrid
-- [ ] Payment processing with Stripe
-- [ ] Persistent booking and retreat storage
+- [ ] Persistent retreat storage
 - [ ] User authentication
 - [ ] Admin dashboard for retreat management
 - [ ] Email marketing integration

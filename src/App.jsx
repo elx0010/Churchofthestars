@@ -3,9 +3,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Landing from './pages/Landing';
-import Booking from './pages/Booking';
-import Payment from './pages/Payment';
-import Confirmation from './pages/Confirmation';
 import './App.css';
 
 function App() {
@@ -16,9 +13,6 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/booking" element={<Booking />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/confirmation" element={<Confirmation />} />
         </Routes>
         <Footer />
       </div>

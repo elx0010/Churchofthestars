@@ -45,7 +45,7 @@ export default function ContactForm() {
 
   return (
     <div className="bg-gray-100 rounded-lg shadow-lg p-8 max-w-sm sm:max-w-xl mx-auto">
-      <h3 className="text-brand-night text-left mb-6 text-2xl font-semibold">Get In Touch</h3>
+      <h3 className="font-display text-brand-night text-left mb-6 text-2xl font-semibold">Get In Touch</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-brand-night font-semibold mb-2">Name</label>

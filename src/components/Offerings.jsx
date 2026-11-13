@@ -108,7 +108,7 @@ export default function Offerings() {
                     from={imageFirst ? 'right' : 'left'}
                     className={imageFirst ? 'md:order-2' : ''}
                   >
-                    <h3 className="text-3xl font-bold text-brand-cream mb-4">{offering.title}</h3>
+                    <h3 className="font-display text-3xl font-bold text-brand-cream mb-4">{offering.title}</h3>
                     <p className="text-brand-cream/90 leading-relaxed">{offering.description}</p>
                   </Reveal>
                   <Reveal
