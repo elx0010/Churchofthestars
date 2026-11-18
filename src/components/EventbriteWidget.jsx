@@ -17,7 +17,7 @@ export default function EventbriteWidget() {
 
   return (
     <div 
-      className="sk-eventbrite-event"
+      className="sk-eventbrite-event w-full"
       data-embed-id="25729438"
     ></div>
   );

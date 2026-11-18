@@ -80,28 +80,24 @@ export default function Landing() {
       </section>
 
       {/* Our Offerings Section */}
+      <div className="border-t border-brand-dCream/30"></div>
       <Offerings />
       <VideoSection />
       </div>
 
       {/* Retreat Calendar Section */}
-      <section id="calendar" className="py-20 px-4 bg-brand-leaf">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center gap-4 mb-6" aria-hidden="true">
-            <span className="h-px w-24 bg-brand-dCream/60"></span>
-            <span className="text-2xl leading-none text-brand-dCream [text-shadow:0_0_12px_rgba(224,198,130,0.9)]">✦</span>
-            <span className="h-px w-24 bg-brand-dCream/60"></span>
-          </div>
-          <h2 className="section-title text-center mb-12">Upcoming Events</h2>
+      <section id="calendar" className="py-20 px-4 bg-brand-forest border-t border-brand-dCream/30">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="section-title text-center mb-12 text-brand-cream">Upcoming Events</h2>
 
           <EventbriteWidget />
         </div>
       </section>
 
 
-      <section id="contact" className="py-20 px-4 bg-brand-night">
+      <section id="contact" className="py-20 px-4 bg-brand-forest border-t border-brand-dCream/30">
         <div className="max-w-4xl mx-auto">
-          <h2 className="section-title text-center mb-12">Got any Questions?</h2>
+          <h2 className="section-title text-center mb-12 text-brand-cream">Got any Questions?</h2>
           <div>
             <ContactForm />
           </div>
