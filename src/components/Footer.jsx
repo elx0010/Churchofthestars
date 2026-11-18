@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-6">
           {/* Left Column */}
-          <div className="text-center border-r border-brand-dCream/30 pr-8">
+          <div className="text-center border-b md:border-b-0 md:border-r border-brand-dCream/30 pb-6 md:pb-0 md:pr-8 md:mb-0">
             <h3 className="flex flex-col items-center justify-center text-2xl font-semibold mb-3 tracking-widest text-brand-dCream">CHURCH OF THE<span>STARS</span></h3>
             <p className="text-center text-lg text-gray-300 leading-relaxed italic">
               A wellness and spiritual retreat experience in the heart of nature.
@@ -16,7 +16,7 @@ export default function Footer() {
           </div>
 
           {/* Middle Column */}
-          <div className="text-center border-r border-brand-dCream/30 pr-8">
+          <div className="text-center border-b md:border-b-0 md:border-r border-brand-dCream/30 pb-6 md:pb-0 md:pr-8 md:mb-0">
             <h4 className="text-2xl font-semibold mb-4 tracking-widest text-brand-dCream">Quick Links</h4>
             <ul className="space-y-2">
               <li>
@@ -46,16 +46,16 @@ export default function Footer() {
           <div className="text-center">
             <h4 className="text-2xl font-semibold mb-4 tracking-widest text-brand-dCream">Contact</h4>
             <div className="space-y-3">
-              <div className="flex items-center justify-center gap-3">
-                <MdOutlineMailOutline className="text-2xl text-brand-dCream" />
+              <div className="flex items-center justify-center gap-3 pr-4">
+                <MdOutlineMailOutline className="text-2xl text-brand-dCream flex-shrink-0" />
                 <p className="text-lg text-gray-300">info.churchofthestars@gmail.com</p>
               </div>
-              <div className="flex items-center pl-14 justify-start gap-3">
-                <MdOutlinePhone className="text-2xl text-brand-dCream" />
+              <div className="flex items-center justify-center gap-3 pr-4">
+                <MdOutlinePhone className="text-2xl text-brand-dCream flex-shrink-0" />
                 <p className="text-lg text-gray-300">(435) 592-2401</p>
               </div>
-              <div className="flex items-center pl-14 justify-start gap-3">
-                <MdOutlineLocationOn className="text-2xl text-brand-dCream" />
+              <div className="flex items-center justify-center gap-3 pr-4">
+                <MdOutlineLocationOn className="text-2xl text-brand-dCream flex-shrink-0" />
                 <p className="text-lg text-gray-300">Retreat Center<br />Cedar City, Utah</p>
               </div>
             </div>
